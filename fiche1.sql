@@ -85,3 +85,26 @@ WHERE (serie = 'Lucky Luke' AND editeur = 'Dargaud' )
 SELECT Distinct titre,prix
 FROM bd1.albums
 WHERE pays_edition ='fr' AND (dessinateur IS NULL OR coloriste IS NULL );
+
+--requete 17
+SELECT isbn, titre, date_edition
+FROM   bd1.albums
+WHERE  serie = 'Astérix'
+ORDER  BY date_edition ASC;
+
+--requete 18
+SELECT DISTINCT titre
+FROM   bd1.albums
+WHERE  serie = 'Astérix'
+ORDER  BY titre;
+
+--requete 19
+SELECT isbn, titre, editeur, date_edition
+FROM   bd1.albums
+ORDER  BY editeur, date_edition;
+
+--requete 20
+SELECT isbn,titre, prix
+FROM   bd1.albums
+WHERE  editeur = 'Dupuis'
+ORDER  BY prix DESC;
