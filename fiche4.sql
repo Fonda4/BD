@@ -57,7 +57,7 @@ SELECT EXTRACT(YEAR FROM al.date_edition) AS annee, COUNT(*) AS nombre_albums, A
 FROM bd3.albums al, bd3.editeurs ed
 WHERE al.editeur = ed.id_editeur
   AND ed.pays = 'be'
-GROUP BY EXTRACT(YEAR FROM al.date_edition)
+GROUP BY EXTRACT(YEAR FROM al.date_edition), al.date_edition
 HAVING COUNT(*) > 1
 ORDER BY nombre_albums DESC, annee ASC;
 
