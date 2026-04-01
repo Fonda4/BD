@@ -228,6 +228,7 @@ from
 	exo2_1.kots
 group by superficie
 
+===
 
 SELECT ko.id_kot, ko.adresse, ko.loyer, ko.superficie, pr.nom, pr.prenom
 FROM exo2_1.kots ko, exo2_1.proprietaires pr
