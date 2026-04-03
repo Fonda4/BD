@@ -1,0 +1,64 @@
+@startuml
+skinparam linetype ortho
+hide circle
+
+entity "clients" as cl {
+  * **email** : varchar(100) <<PK>>
+  --
+  * nom : varchar(50) <<NN>>
+  * prenom : varchar(50) <<NN>>
+  * adresse : varchar(255) <<NN>>
+  * mot_de_passe : varchar(50) <<NN>>
+}
+
+entity "articles" as ar {
+  * **reference** : integer <<PK>>
+  --
+  * denomination : varchar(100) <<NN>>
+  * prix_actuel : numeric <<NN>>
+}
+
+entity "listes" as li {
+  * **numero_liste** : integer <<PK>>
+  --
+  * mot_de_passe_cadeau : varchar(50) <<NN>>
+  * email_parent : varchar(100) <<FK>> <<NN>>
+}
+
+entity "compositions_listes" as comp {
+  * **numero_liste** : integer <<PK>> <<FK>>
+  * **reference_article** : integer <<PK>> <<FK>>
+  --
+  * quantite_demandee : integer <<NN>>
+  * prix_unitaire_liste : numeric <<NN>>
+}
+
+entity "cadeaux" as ca {
+  * **id_cadeau** : integer <<PK>>
+  --
+  * numero_liste : integer <<FK>> <<NN>>
+  * date_cadeau : date <<NN>>
+  * message : varchar(500)
+  * email_client_donneur : varchar(100) <<FK>>
+  * nom_donneur : varchar(50)
+  * prenom_donneur : varchar(50)
+}
+
+entity "details_cadeaux" as det {
+  * **id_cadeau** : integer <<PK>> <<FK>>
+  * **reference_article** : integer <<PK>> <<FK>>
+  --
+  * quantite_offerte : integer <<NN>>
+}
+
+' Relations
+cl "1" -- "0..*" li : "gère"
+li "1" -- "1..*" comp : "est composée de"
+ar "1" -- "0..*" comp : "apparaît dans"
+li "1" -- "0..*" ca : "reçoit"
+ca "1" -- "1..*" det : "contient"
+ar "1" -- "0..*" det : "est offert via"
+cl "0..1" -- "0..*" ca : "offre"
+
+@enduml
+  
